@@ -16,6 +16,12 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
+    public UserLocationDTO saveUserLocation(UserLocationDTO userLocationDTO){
+        User user = convertDtoToEntity(userLocationDTO);
+        return convertEntityToDto(repository.save(user));
+
+    }
+
     public List<UserLocationDTO> getAllUserLocation(){
         return repository.findAll()
                 .stream()
@@ -31,5 +37,14 @@ public class UserService {
         userLocationDTO.setLongitude(user.getLocation().getLongitude());
         userLocationDTO.setLatitude(user.getLocation().getLatitude());
         return userLocationDTO;
+    }
+
+    private User convertDtoToEntity(UserLocationDTO userLocationDTO){
+        User user= new User();
+        user.setUid(userLocationDTO.getUid());
+        user.setEmail(userLocationDTO.getEmail());
+
+
+        return user;
     }
 }
