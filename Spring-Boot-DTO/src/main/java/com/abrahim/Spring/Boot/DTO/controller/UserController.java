@@ -20,7 +20,8 @@ public class UserController {
     }
 
     @GetMapping("/users-location")
-    public List<UserLocationDTO> ShowAllUserLocation(){
-        return service.getAllUserLocation();
+    public List<UserLocationDTO> ShowAllUserLocation( @RequestParam (value = "email", required = false) String email,
+                                                      @RequestParam (value = "place", required = false) String place){
+        return service.getAllUserLocation(email, place);
     }
 }
